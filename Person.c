@@ -343,7 +343,3 @@ void display_CBL(VSpace vs, PersonCusorBasedList list){
 	}
 	printf("}\n");
 }
-
-
-
-
