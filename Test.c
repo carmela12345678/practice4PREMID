@@ -29,9 +29,10 @@ int main(void)
 //	visualizeQueue(create);
 	queuelength = get_queue_length(create);
 	printf("\nQueue lenght is: %d\n", queuelength);
+	printf("\nGet Female function:\n");
+	getf = get_all_females(create);
 	
-//	getf = get_all_females(create);
-	
+	printf("\nGet Male remove from queue function: (wait lang)\n");
 	getM = remove_all_males(&create);
 	
 

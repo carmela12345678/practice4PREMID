@@ -50,7 +50,7 @@ PersonDynamicArrayList remove_all_males(CircularArrayQueue *list){
 	PersonDynamicArrayList retM;
 	int trav;
 	CircularArrayQueue *temp;
-	int x;
+	int x, cnt=0;
 	
 	init_DAL(&retM);
 	temp = list;

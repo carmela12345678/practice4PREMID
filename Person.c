@@ -229,7 +229,15 @@ void insert_last_LL(PersonLinkedList *list, Person p){
 	
 }
 void insert_after_LL(PersonLinkedList *list, Person p, String name){
+	PersonLinkedList temp, *trav;
 	
+	for(trav = list; *trav != NULL && strcmp((*trav)->elem.name, name)<0;trav = &(*trav)->next){}
+	temp = (PersonLinkedList)malloc (sizeof(PersonNode));
+	if(temp!=NULL){
+		temp->elem = p;
+		temp->next = *trav;
+		*trav = temp;
+	}
 }
 void delete_first_LL(PersonLinkedList *list){
 	PersonLinkedList temp;
