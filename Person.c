@@ -3,41 +3,41 @@
 #include<stdlib.h>
 #include "Person.h"
 
-int main(){
-	//static Array
-//	PersonStaticArrayList myList;
-//	init_SAL(&myList);
-	Person p1 = createPerson("Carmela", 'L', "Cebu City");
-	Person p2 = createPerson("Joan", 'C', "Cabancalan City");
-	Person p3 = createPerson("Niks", 'S', "Toledo City");
+//int main(){
+//	//static Array
+////	PersonStaticArrayList myList;
+////	init_SAL(&myList);
+//	Person p1 = createPerson("Carmela", 'F', "CebuCity");
+//	Person p2 = createPerson("Joan", 'F', "CabancalanCity");
+//	Person p3 = createPerson("Niks", 'M', "Toledo City");
+////
+////	
+////	insert_first_SAL(&myList, p1);
+////	insert_last_SAL(&myList, p2);
+////	insert_first_SAL(&myList, p3);
 //
+////	insert_at_SAL(&myList, p3,0);
+////	delete_first_SAL(&myList);
+////	delete_last_SAL(&myList);
+////	delete_by_sex_SAL(&myList, 'C');
+////	display_SAL(myList);
 //	
-//	insert_first_SAL(&myList, p1);
-//	insert_last_SAL(&myList, p2);
-//	insert_first_SAL(&myList, p3);
-
-//	insert_at_SAL(&myList, p3,0);
-//	delete_first_SAL(&myList);
-//	delete_last_SAL(&myList);
-//	delete_by_sex_SAL(&myList, 'C');
-//	display_SAL(myList);
-	
-	//endOf Static Array
-	
-	//Linked List
-	PersonLinkedList ll = NULL;
-	
-	insert_first_LL(&ll, p1);
-	insert_first_LL(&ll, p3);
-	insert_last_LL(&ll, p2);
-	//delete_first_LL(&ll);
-	//delete_last_LL(&ll);
-	//delete_by_city_LL(&ll,"Toledo City");
-	
-	display_LL(ll);
-	
-	return 0;
-}
+//	//endOf Static Array
+//	
+//	//Linked List
+//	PersonLinkedList ll = NULL;
+//	
+//	insert_first_LL(&ll, p1);
+//	insert_first_LL(&ll, p3);
+//	insert_last_LL(&ll, p2);
+//	//delete_first_LL(&ll);
+//	//delete_last_LL(&ll);
+//	//delete_by_city_LL(&ll,"Toledo City");
+//	
+//	display_LL(ll);
+//	
+//	return 0;
+//}
 
 Person createPerson(String name, char sex, String city) {
     Person p;
@@ -134,7 +134,7 @@ void insert_first_DAL(PersonDynamicArrayList *list, Person p){
 	int x;
 	if(list->count >= list->max){
 		list->max *=2;
-		list->data = realloc(list->data, list->max);
+		list->data = (Person*)realloc(list->data, list->max);
 	}
 	
 	for(x=list->count; x >=0; x--){
@@ -147,7 +147,7 @@ void insert_first_DAL(PersonDynamicArrayList *list, Person p){
 void insert_last_DAL(PersonDynamicArrayList *list, Person p){
 	if(list->count >= list->max){
 		list->max *=2;
-		list->data = realloc(list->data, list->max);
+		list->data = (Person*)realloc(list->data, list->max);
 	}
 	
 	list->data[list->count] = p;
@@ -157,7 +157,7 @@ void insert_at_DAL(PersonDynamicArrayList *list, Person p, int index){
 	int x;
 	if(list->count >= list->max){
 		list->max *=2;
-		list->data = realloc(list->data, list->max);
+		list->data = (Person*)realloc(list->data, list->max);
 	}
 	
 	if(index <list->count && index >=0){
@@ -282,7 +282,7 @@ void init_vspace(VSpace *vs){
 	for(x=MAX_VSPACE-1; x>=0; x--){
 		vs->data[x].next = x-1;
 	}
-	vs->avail = MAX-1;
+	vs->avail = MAX_VSPACE-1;
 }
 Position alloc_space(VSpace *vs){
 	Position available = vs->avail;
@@ -292,7 +292,7 @@ Position alloc_space(VSpace *vs){
 	return available;
 }
 void free_space(VSpace *vs, Position index){
-	if(index != -1 && index < MAX_SPACE){
+	if(index != -1 && index < MAX_VSPACE){
 		vs->data[index].next = vs->avail;
 		vs->avail = index;
 	}
@@ -311,7 +311,7 @@ void insert_last_CBL(VSpace *vs, PersonCusorBasedList *list, Person p){
 	
 	if(temp != -1){
 		for(trav=list; *trav != -1; trav = & vs->data[*trav].next){}
-		vs->data[temp].elem = elem;
+		vs->data[temp].elem = p;
 		vs->data[temp].next = *trav;
 		*trav = temp;
 	}
@@ -328,7 +328,6 @@ void delete_last_CBL(VSpace *vs, PersonCusorBasedList *list){
 	PersonCusorBasedList temp = MAX_VSPACE -1;
 
 	if(*list != -1){
-		vs->data[temp].elem =0;
 		free_space(vs, temp);
 	}
 }
@@ -343,3 +342,7 @@ void display_CBL(VSpace vs, PersonCusorBasedList list){
 	}
 	printf("}\n");
 }
+
+
+
+

@@ -6,7 +6,7 @@
 
 #include <stdbool.h>
 #include "Person.h"
-#define MAX 10
+#define MAX 4
 
 //typedef int bool;
 typedef Person Type;
@@ -27,6 +27,19 @@ CircularArrayQueue create_array_queue(){
 	create.rear = MAX-1;
 	
 	return create;
+}
+void visualizeQueue(CircularArrayQueue list){
+	int x;
+	
+	for(x=0; x<MAX; x++){
+		printf("%5s ", list.data[x].name);
+	}
+	printf("\n");
+	for(x=0; x<MAX; x++){
+		printf("%5d ", x);
+	}
+	printf("\n");
+	printf("Front: %d\nRear: %d\n", list.front, list.rear);
 }
 
 /** \fn void init_array_queue(CircularArrayQueue *list);
